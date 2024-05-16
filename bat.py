@@ -118,28 +118,3 @@ plt.show()
 ###############################################################
 
 
-def rainflow_method(df):
-    # 提取充放电功率数据
-    discharge_power = df['Discharge Power'].values
-    charge_power = df['Charge Power'].values
-    hours = len(discharge_power)
-    
-    # 初始化循环计数数组
-    cycles = np.zeros(hours - 2, dtype=int)
-    
-    # 应用三点雨流计数法
-    for i in range(1, hours - 1):
-        if discharge_power[i - 1] < discharge_power[i] and discharge_power[i] > discharge_power[i + 1]:
-            # 峰值
-            cycles[i - 1] += 1
-        elif discharge_power[i - 1] > discharge_power[i] and discharge_power[i] < discharge_power[i + 1]:
-            # 谷值
-            cycles[i - 1] -= 1
-    
-    # 计算DOD循环次数
-    dod_cycles = np.abs(cycles).sum()
-    return dod_cycles
-
-# 使用上面定义的函数计算DOD循环次数
-dod_cycles = rainflow_method(df)
-print(f'Total DOD cycles: {dod_cycles}')
