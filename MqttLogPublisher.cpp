@@ -79,32 +79,3 @@ void MqttLogPublisher::publishLogWithDetails(const std::string &timestamp, const
     // 修正消息内容，使用jsonStr而不是"hello"
     mqtt::message_ptr pubmsg = mqtt::make_message(logTopic, jsonStr);
     client.publish(pubmsg); // 发布消息并等待操作完成
-}
-
-// int main() {
-//     std::string serverAddress = "tcp://192.168.122.17:1883";
-//     std::string clientId = "mglog";
-//     std::string topic = "mg/log";
-//     std::string userName = "nyw";
-//     std::string passWord = "nyw123456";
-
-//     MqttLogPublisher logPublisher(serverAddress, clientId, topic);
-//     logPublisher.connect(userName,passWord);
-
-//     // 发布包含详细信息的日志消息
-//     std::string timestamp = "1709014426";
-//     std::string level = "ERROR";
-//     std::string message = "PCS voltage store failed";
-//     std::string sourceItem = "InsertYC2TD()";
-//     std::string logsourceId = "40010";
-//     while (1)
-//     {
-//         std::this_thread::sleep_for(std::chrono::seconds(5));
-//         logPublisher.publishLogWithDetails(timestamp, level, message, sourceItem, logsourceId);
-
-//     }
-
-//     logPublisher.disconnect();
-
-//     return 0;
-// }
