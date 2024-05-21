@@ -79,3 +79,4 @@ void MqttLogPublisher::publishLogWithDetails(const std::string &timestamp, const
     // 修正消息内容，使用jsonStr而不是"hello"
     mqtt::message_ptr pubmsg = mqtt::make_message(logTopic, jsonStr);
     client.publish(pubmsg); // 发布消息并等待操作完成
+}
